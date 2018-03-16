@@ -1,0 +1,44 @@
+{
+	"tags":[
+		{
+			"MediaWiki":"'''''",
+			"XMLopen":"<text:span text:style-name=\"BOLD\"><text:span text:style-name=\"ITALIC\">",
+			"XMLclose":"</text:span></text:span>"
+		},
+		{
+			"MediaWiki":"'''",
+			"XMLopen":"<text:span text:style-name=\"BOLD\">",
+			"XMLclose":"</text:span>"
+		},
+		{
+			"MediaWiki":"''",
+			"XMLopen":"<text:span text:style-name=\"ITALIC\">",
+			"XMLclose":"</text:span>"
+		},
+		{
+			"MediaWiki":"======",
+			"XMLopen":"</text:p><text:p text:style-name=\"HEADING6\">",
+			"XMLclose":"</text:p><text:p text:style-name=\"PARAGRAPH\">"
+		},
+		{
+			"MediaWiki":"=====",
+			"XMLopen":"</text:p><text:p text:style-name=\"HEADING5\">",
+			"XMLclose":"</text:p><text:p text:style-name=\"PARAGRAPH\">"
+		},
+		{
+			"MediaWiki":"====",
+			"XMLopen":"</text:p><text:p text:style-name=\"HEADING4\">",
+			"XMLclose":"</text:p><text:p text:style-name=\"PARAGRAPH\">"
+		},
+		{
+			"MediaWiki":"===",
+			"XMLopen":"</text:p><text:p text:style-name=\"HEADING3\">",
+			"XMLclose":"</text:p><text:p text:style-name=\"PARAGRAPH\">"
+		},
+		{
+			"MediaWiki":"==",
+			"XMLopen":"</text:p><text:p text:style-name=\"HEADING2\">",
+			"XMLclose":"</text:p><text:p text:style-name=\"PARAGRAPH\">"
+		}
+	]
+}
