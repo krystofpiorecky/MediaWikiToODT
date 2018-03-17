@@ -17,6 +17,15 @@
 			//create .xml file into the temp.zip
 
 			$zip->addFromString("content.xml", $source);
+
+			//create META-INF folder with manifest.xml inside
+
+			$zip->addEmptyDir('META-INF');
+			$zip->addFromString(
+				"META-INF/manifest.xml",
+				ODT::manifest()
+			);
+
 			echo "file created";
 			$zip->close();
 
@@ -35,15 +44,45 @@
 
 			$file = file_get_contents("classes/translate.json");
 			$table = json_decode($file, true);
-			$table = $table['tags'];
 
-			foreach($table as $t)
+			$html = $table['HTML'];
+			$mediawiki = $table['MediaWiki'];
+
+			//replace HTML tags 
+			foreach($html as $h)
+			{
+				foreach($h['HTML'] as $htmlTag)
+				{
+					//OPEN tag
+					$output = join(
+						explode(
+							'<' . $htmlTag . '>', 
+							$output
+						),
+						$h['XMLopen']
+					);
+
+					//CLOSE tag
+					//works fine with single tag elements, because there is no such thing like </br>
+
+					$output = join(
+						explode(
+							'</' . $htmlTag . '>', 
+							$output
+						),
+						$h['XMLclose']
+					);
+				}
+			}
+
+			//replace MediaWiki tags 
+			foreach($mediawiki as $m)
 			{
 				$output = ODT::replaceOpenCloseTags(
 					$output,
-					$t['MediaWiki'], 
-					$t['XMLopen'],
-					$t['XMLclose']
+					$m['MediaWiki'], 
+					$m['XMLopen'],
+					$m['XMLclose']
 				);
 			}
 
@@ -77,6 +116,16 @@
 
 			return $result;
 		}
+
+		public static function manifest()
+		{
+			return '<?xml version="1.0" encoding="UTF-8"?>
+				<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0">
+				 	<manifest:file-entry manifest:full-path="/" manifest:media-type="application/vnd.oasis.opendocument.text"/>
+				 	<manifest:file-entry manifest:full-path="content.xml" manifest:media-type="text/xml"/>
+				</manifest:manifest>';
+		}
+
 		public static function XMLheader()
 		{
 			// header of generated ODT file
@@ -113,6 +162,27 @@
 					style:family="text">
 					<style:text-properties 
 						fo:font-style="italic"/>
+				</style:style>
+				<style:style 
+					style:name="UNDERLINE" 
+					style:parent-style-name="Standardnípísmoodstavce" 
+					style:family="text">
+					<style:text-properties 
+						style:text-underline-type="single" 
+						style:text-underline-style="solid" 
+						style:text-underline-width="auto" 
+						style:text-underline-mode="continuous"/>
+				</style:style>
+				<style:style 
+					style:name="STRIKETROUGH" 
+					style:parent-style-name="Standardnípísmoodstavce" 
+					style:family="text">
+					<style:text-properties 
+						style:text-line-through-style="solid" 
+						style:text-line-through-width="auto" 
+						style:text-line-through-color="font-color" 
+						style:text-line-through-mode="continuous" 
+						style:text-line-through-type="single"/>
 				</style:style>
 				<style:style 
 					style:name="HEADING2" 

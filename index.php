@@ -3,12 +3,10 @@
 	include_once('classes/odt.php');
 
 	ODT::createFrom("
-		== MediaWiki to ODT ==
-		=== Nadpis 3 ===
-		==== Nadpis 4 ====
-		===== Nadpis 5 =====
-		====== Nadpis 6 ======
-		''italic'' '''bold''' '''''bold and italic'''''
+		== Heading ==
+		<u>'''underline'''</u><ins>''inserted''</ins>
+		====== Smaller Heading ======
+		<s>'''struck out'''</s><del>''deleted''</del>
 	");
 
 ?>
